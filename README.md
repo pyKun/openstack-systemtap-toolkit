@@ -61,7 +61,13 @@ Build SystemTap and elfutils:
     make install
     ln -s ~/systemtap-2.8-21886/bin/stap /usr/bin/stap
 
+## Thanks
+A lot of thanks to jcea's cpython patches[4].
+
 ## Reference
 1. https://launchpad.net/ubuntu/+source/systemtap
 2. https://sourceware.org/systemtap/ftp/releases/
 3. https://sourceware.org/git/?p=systemtap.git;a=blob_plain;f=README;hb=HEAD
+4. https://www.jcea.es/artic/python_dtrace.htm
+
+
