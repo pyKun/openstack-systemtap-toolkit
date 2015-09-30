@@ -1,5 +1,5 @@
 # openstack-systemtap-toolkit
-SystemTap toolkits for OpenStack
+SystemTap Toolkits for OpenStack
 
 ## Background
 Since nearly all of OpenStack projects are based on Python and official community CI runs Ubuntu as host, the toolkits here are known or unknown tricks of tracing Python via SystemTap.
