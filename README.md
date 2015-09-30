@@ -32,7 +32,34 @@ Upgrade Kernel and install its debuginfo package:
     sudo apt-get update
     sudo apt-get install linux-image-$(uname -r)-dbgsym
     # reboot again
+    
+Download, patch and build cPython:
 
+    cd ~
+    git clone https://github.com/python/cpython
+    wget https://www.jcea.es/artic/python_dtrace-2_7_9_05d8fd4c57a1.txt -O python-dtrace-2.7.9.patch
+    cd cpython
+    git checkout 2.7
+    git checkout ad609d460a207bc12ca83b43ab764ea58bd013ab # the release of 2.7.9
+    git apply ../python-dtrace-2.7.9.patch
+    autoconf
+    ./configure --with-dtrace
+    make
+    make install
+    ln -s ~/cpython/python /usr/bin/python
+    
+Build SystemTap and elfutils:
+
+    cd ~
+    wget https://sourceware.org/systemtap/ftp/releases/systemtap-2.8.tar.gz
+    wget https://fedorahosted.org/releases/e/l/elfutils/0.163/elfutils-0.163.tar.bz2
+    tar jxf elfutils-0.163.tar.bz2
+    tar zxf systemtap-2.8.tar.gz 
+    cd systemtap-2.8/
+    ./configure  '--with-elfutils=/home/hk/elfutils-0.163' --prefix=/home/hk/systemtap-2.8-21886
+    make
+    make install
+    ln -s ~/systemtap-2.8-21886/bin/stap /usr/bin/stap
 
 ## Reference
 1. https://launchpad.net/ubuntu/+source/systemtap
