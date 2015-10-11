@@ -39,14 +39,12 @@ Download, patch and build cPython:
     git clone https://github.com/python/cpython
     wget https://www.jcea.es/artic/python_dtrace-2_7_9_05d8fd4c57a1.txt -O python-dtrace-2.7.9.patch
     cd cpython
-    git checkout 2.7
     git checkout ad609d460a207bc12ca83b43ab764ea58bd013ab # the release of 2.7.9
     git apply ../python-dtrace-2.7.9.patch
     autoconf
-    ./configure --with-dtrace
+    ./configure --with-dtrace --prefix=/usr/local/
     make
     make install
-    ln -s ~/cpython/python /usr/bin/python
     
 Build SystemTap and elfutils:
 
@@ -56,14 +54,13 @@ Build SystemTap and elfutils:
     tar jxf elfutils-0.163.tar.bz2
     tar zxf systemtap-2.8.tar.gz 
     cd systemtap-2.8/
-    ./configure  '--with-elfutils=$HOME/elfutils-0.163' --prefix=$HOME/systemtap-2.8-21886
+    ./configure  "--with-elfutils=$HOME/elfutils-0.163" --prefix=/usr/
     make
     make install
-    ln -s ~/systemtap-2.8-21886/bin/stap /usr/bin/stap
 
 Check the result:
 
-    $ stap -l 'process("python").mark("*")' # if you see those marks, everything works
+    $ stap -l 'process("/usr/local/bin/python").mark("*")' # if you see those marks, everything works
     process("/opt/stack/cpython/python").mark("function__entry")
     process("/opt/stack/cpython/python").mark("function__return")
     process("/opt/stack/cpython/python").mark("gc__done")
