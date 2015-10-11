@@ -56,10 +56,23 @@ Build SystemTap and elfutils:
     tar jxf elfutils-0.163.tar.bz2
     tar zxf systemtap-2.8.tar.gz 
     cd systemtap-2.8/
-    ./configure  '--with-elfutils=/home/hk/elfutils-0.163' --prefix=/home/hk/systemtap-2.8-21886
+    ./configure  '--with-elfutils=$HOME/elfutils-0.163' --prefix=$HOME/systemtap-2.8-21886
     make
     make install
     ln -s ~/systemtap-2.8-21886/bin/stap /usr/bin/stap
+
+Check the result:
+
+    $ stap -l 'process("python").mark("*")' # if you see those marks, everything works
+    process("/opt/stack/cpython/python").mark("function__entry")
+    process("/opt/stack/cpython/python").mark("function__return")
+    process("/opt/stack/cpython/python").mark("gc__done")
+    process("/opt/stack/cpython/python").mark("gc__start")
+    process("/opt/stack/cpython/python").mark("instance__delete__done")
+    process("/opt/stack/cpython/python").mark("instance__delete__start")
+    process("/opt/stack/cpython/python").mark("instance__new__done")
+    process("/opt/stack/cpython/python").mark("instance__new__start")
+    process("/opt/stack/cpython/python").mark("line")
 
 ## Thanks
 A lot of thanks to jcea's cpython patches[4].
