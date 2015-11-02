@@ -2095,7 +2095,7 @@ index d6d479a..5a0bea2 100644
     linker (dyld) instead of the old-style (NextStep) dynamic linker (rld).
     Dyld is necessary to support frameworks. */
 diff --git a/setup.py b/setup.py
-index 7868b7b..eeed02f 100644
+index 7868b7b..2f94b9d 100644
 --- a/setup.py
 +++ b/setup.py
 @@ -681,6 +681,9 @@ class PyBuildExt(build_ext):
@@ -2108,3 +2108,12 @@ index 7868b7b..eeed02f 100644
          #
          # Here ends the simple stuff.  From here on, modules need certain
          # libraries, are platform-specific, or present other surprises.
+@@ -1174,7 +1177,7 @@ class PyBuildExt(build_ext):
+                 sqlite_defines.append(('MODULE_NAME', '\\"sqlite3\\"'))
+ 
+             # Comment this out if you want the sqlite3 module to be able to load extensions.
+-            sqlite_defines.append(("SQLITE_OMIT_LOAD_EXTENSION", "1"))
++            #sqlite_defines.append(("SQLITE_OMIT_LOAD_EXTENSION", "1"))
+ 
+             if host_platform == 'darwin':
+                 # In every directory on the search path search for a dynamic
